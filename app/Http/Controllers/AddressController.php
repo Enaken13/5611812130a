@@ -9,12 +9,17 @@ use App\Quotation;
 
 class AddressController extends Controller
 {
-    public function index()
-    {
-        return view('addresses');
-    }
 
-    public function show(Request $request)
+    public function show()
+    {
+        $addresses = DB::table('addresses')->select('*')->orderBy('name')->get();
+
+        return view('addresses', [
+            'addresses' => $addresses
+        ]);
+
+    }
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
@@ -42,16 +47,6 @@ class AddressController extends Controller
 
         return redirect('/');
     }
-
-    public function select()
-    {
-        $addresses = DB::table('addresses')->select('*')->orderBy('name')->get();
-
-        return view('addresses', [
-            'addresses' => $addresses
-        ]);
-    }
-
 
     public function delete(Address $address)
     {

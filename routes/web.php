@@ -13,9 +13,9 @@
 //use Illuminate\Http\Request;
 //use App\Address;
 
-Route::get('/', 'AddressController@index');
-Route::post('/', 'AddressController@show');
-Route::get('/','AddressController@select');
+
+Route::post('/', 'AddressController@store');
+Route::get('/','AddressController@show');
 Route::delete('/{address}','AddressController@delete');
 
 
